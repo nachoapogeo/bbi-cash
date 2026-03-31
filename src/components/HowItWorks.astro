@@ -1,42 +1,26 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
 
 <section id="how">
-  <span class="section-tag">How it works</span>
-  <h2 class="section-h2 serif">Three steps.<br />Then we handle everything else.</h2>
-  <p class="section-lead">From your first reply to a running ATM in your location — the process is designed to require as little from you as possible.</p>
+  <span class="section-tag">{t.how.tag}</span>
+  <h2 class="section-h2 serif">{t.how.h2_1}<br />{t.how.h2_2}</h2>
+  <p class="section-lead">{t.how.lead}</p>
   <div class="steps">
-    <div class="step">
-      <span class="step-num serif">01</span>
-      <div class="step-icon">✉️</div>
-      <div class="step-title">You reply to us</div>
-      <div class="step-text">
-        No meeting required. No forms to fill. Send us a message and we'll send you
-        a copy of our 6-month trial agreement for review.
-        Read it, ask questions, decide at your own pace.
+    {t.how.steps.map((s) => (
+      <div class="step">
+        <span class="step-num serif">{s.num}</span>
+        <div class="step-icon">{s.icon}</div>
+        <div class="step-title">{s.title}</div>
+        <div class="step-text">{s.text}</div>
+        <div class="step-time">{s.time}</div>
       </div>
-      <div class="step-time">No commitment at this stage</div>
-    </div>
-    <div class="step">
-      <span class="step-num serif">02</span>
-      <div class="step-icon">📋</div>
-      <div class="step-title">We sign and schedule</div>
-      <div class="step-text">
-        Once you're comfortable, we sign the agreement and schedule installation.
-        You provide your legal business name, a W-9, and ACH authorization for
-        commission deposits. That's the full list of what we need from you.
-      </div>
-      <div class="step-time">15 – 20 business days to installation</div>
-    </div>
-    <div class="step">
-      <span class="step-num serif">03</span>
-      <div class="step-icon">💰</div>
-      <div class="step-title">We install. You earn.</div>
-      <div class="step-text">
-        Our team installs the unit, anchors it, connects it, and verifies operations.
-        From that point, we handle all cash loading, maintenance, repairs and
-        24/7 monitoring. Your first commission arrives within 45 days of the
-        first full operating month.
-      </div>
-      <div class="step-time">Monthly direct deposit via PAI — Brinks</div>
-    </div>
+    ))}
   </div>
 </section>

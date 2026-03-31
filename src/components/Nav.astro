@@ -1,3 +1,16 @@
+---
+import type { Translations } from '../i18n/translations';
+import type { Locale } from '../i18n/translations';
+import { getAlternateLocales } from '../i18n/utils';
+
+interface Props {
+  t: Translations;
+  locale: Locale;
+}
+
+const { t, locale } = Astro.props;
+const locales = getAlternateLocales(locale);
+---
 
 <nav>
   <div class="nav-logo">
@@ -5,10 +18,41 @@
     <span>ATM Placement Services</span>
   </div>
   <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#how">How It Works</a>
-    <a href="#why">Why BBI</a>
-    <a href="#who">Who We Serve</a>
-    <a href="#contact" class="nav-cta">Get Started</a>
+    <a href="#about">{t.nav.about}</a>
+    <a href="#how">{t.nav.how}</a>
+    <a href="#why">{t.nav.why}</a>
+    <a href="#who">{t.nav.who}</a>
+    <a href="#contact" class="nav-cta">{t.nav.cta}</a>
+    <div class="lang-switch">
+      {locales.map((l) => (
+        <a href={l.path} class:list={[{ active: l.locale === locale }]}>{l.label}</a>
+      ))}
+    </div>
   </div>
 </nav>
+
+<style>
+  .lang-switch {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+    padding-left: 1rem;
+    border-left: 1px solid rgba(255,255,255,0.15);
+  }
+  .lang-switch a {
+    font-size: 0.7rem !important;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    color: rgba(255,255,255,0.4) !important;
+    transition: all 0.2s;
+  }
+  .lang-switch a:hover {
+    color: var(--gold) !important;
+  }
+  .lang-switch a.active {
+    background: rgba(201,160,64,0.15);
+    color: var(--gold) !important;
+    font-weight: 600;
+  }
+</style>

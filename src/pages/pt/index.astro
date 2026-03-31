@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import WhyBBI from '../../components/WhyBBI.astro';
+import WhoWeServe from '../../components/WhoWeServe.astro';
+import Contract from '../../components/Contract.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import { getTranslations } from '../../i18n/translations';
+
+const locale = 'pt';
+const t = getTranslations(locale);
+---
+
+<Layout
+  title="BBI Cash ATMs — Serviços de Instalação de ATMs | Sul da Flórida"
+  description="BBI Cash instala ATMs grátis em negócios do sul da Flórida. Sem custo, sem manutenção, renda mensal. PAI Alliance — processamento Brinks. Adesivos personalizados disponíveis."
+  lang={locale}
+>
+  <Nav t={t} locale={locale} />
+  <Hero t={t} />
+  <About t={t} />
+  <HowItWorks t={t} />
+  <WhyBBI t={t} />
+  <WhoWeServe t={t} />
+  <Contract t={t} />
+  <Contact t={t} />
+  <Footer />
+</Layout>

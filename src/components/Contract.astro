@@ -1,36 +1,33 @@
 ---
-const items = [
-  { text: '<strong>You provide one standard 110V outlet</strong> and unobstructed access to the ATM location. That is the full extent of your operational obligation.' },
-  { text: '<strong>BBI installs, insures, loads cash, maintains and monitors</strong> the unit at zero cost to you. All processing fees, repair costs and cash management are ours.' },
-  { text: '<strong>You receive a monthly commission</strong> based on transaction volume — paid directly to your bank account via ACH through PAI Alliance — Brinks.' },
-  { text: '<strong>During the 6-month trial:</strong> 30 days written notice to exit — no penalty, no questions asked. After month 12: another no-penalty exit window. We\'re confident you won\'t need it.' },
-  { text: '<strong>Your location is named as Additional Insured</strong> on our $1,000,000 General Liability policy. Certificate provided before installation. You bear no liability for ATM operations.' },
-  { text: '<strong>The ATM remains BBI property at all times.</strong> It cannot be pledged, moved or encumbered. If the agreement ends, we remove the unit at our cost.' },
-];
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
 ---
 
 <section id="contract">
-  <span class="section-tag">The agreement</span>
-  <h2 class="section-h2 serif">What you're committing to —<br />and what you're not.</h2>
-  <p class="section-lead">Read this before you reply. We believe in clarity upfront.</p>
+  <span class="section-tag">{t.contract.tag}</span>
+  <h2 class="section-h2 serif">{t.contract.h2_1}<br />{t.contract.h2_2}</h2>
+  <p class="section-lead">{t.contract.lead}</p>
   <div class="contract-box">
     <div class="contract-header">
       <div class="contract-header-left">
-        <h3 class="serif">ATM Placement Agreement</h3>
-        <p>6-Month Trial · Auto-renewing · Plain language summary</p>
+        <h3 class="serif">{t.contract.header_title}</h3>
+        <p>{t.contract.header_sub}</p>
       </div>
-      <div class="contract-badge">6-Month Trial</div>
+      <div class="contract-badge">{t.contract.badge}</div>
     </div>
     <div class="contract-body">
-      {items.map((item) => (
+      {t.contract.items.map((item) => (
         <div class="contract-item">
           <div class="contract-check">✓</div>
-          <div class="contract-item-text" set:html={item.text} />
+          <div class="contract-item-text" set:html={item} />
         </div>
       ))}
     </div>
-    <div class="contract-footer">
-      The full agreement is straightforward and written in plain language. We'll send you a copy when you reach out — no commitment required to read it.
-    </div>
+    <div class="contract-footer">{t.contract.footer}</div>
   </div>
 </section>

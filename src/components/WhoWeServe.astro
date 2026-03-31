@@ -1,22 +1,19 @@
 ---
-const businesses = [
-  { icon: '🍽️', title: 'Restaurants & Cafés', text: 'Reduce card processing fees on small tickets. Give servers a path to cash tips. Keep cash in the room.' },
-  { icon: '🍸', title: 'Bars & Lounges', text: 'Keep guests from stepping out to find an ATM. Cash customers spend more and tip more. Reduce card surcharges on bar tabs.' },
-  { icon: '🏨', title: 'Hotels & Motels', text: 'Guests need cash for tips, taxis and local markets. An ATM in the lobby is a service they expect and a revenue stream you didn\'t have.' },
-  { icon: '✂️', title: 'Barbershops & Salons', text: 'Cash-heavy business with clients who often come in without it. An ATM keeps the transaction simple and the tip generous.' },
-  { icon: '👕', title: 'Laundromats', text: 'Machines run on cash. Customers who forget to bring it leave. An ATM on-site changes that dynamic immediately.' },
-  { icon: '🏢', title: 'Condominiums & HOAs', text: 'Residents and guests need cash access on-premises. One agreement can cover multiple properties under a single management.' },
-  { icon: '🛒', title: 'Convenience Stores', text: 'The classic ATM location — high traffic, cash-first customers, minimal footprint required. A natural fit for any c-store operation.' },
-  { icon: '🏬', title: 'Multi-location Chains', text: 'Regional chains with 3–20 locations. One contract, one contact, one monthly statement. Consistent service across all your properties.' },
-];
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
 ---
 
 <section id="who">
-  <span class="section-tag">Who we serve</span>
-  <h2 class="section-h2 serif">Built for the businesses<br />that run South Florida.</h2>
-  <p class="section-lead">We focus on independent operators and regional chains — the businesses that keep neighborhoods moving and that the big ATM companies consistently overlook.</p>
+  <span class="section-tag">{t.who.tag}</span>
+  <h2 class="section-h2 serif">{t.who.h2_1}<br />{t.who.h2_2}</h2>
+  <p class="section-lead">{t.who.lead}</p>
   <div class="who-grid">
-    {businesses.map((b) => (
+    {t.who.businesses.map((b) => (
       <div class="who-card">
         <span class="who-icon">{b.icon}</span>
         <div class="who-title">{b.title}</div>

@@ -1,38 +1,37 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
 
 <section id="contact">
-  <span class="section-tag">Get started</span>
+  <span class="section-tag">{t.contact.tag}</span>
   <p class="contact-oneliner serif">
-    You provide a 110V outlet.<br />
-    We provide the machine, the cash, the insurance,<br />
-    the maintenance — <em>and a monthly check.</em>
+    {t.contact.oneliner_1}<br />
+    {t.contact.oneliner_2}<br />
+    {t.contact.oneliner_3} <em>{t.contact.oneliner_em}</em>
   </p>
   <div class="contact-cta-block">
     <p class="contact-reply">
-      We won't ask for a meeting or a call.<br />
-      If this makes sense for your business — <strong>just send us a message.</strong><br />
-      We'll reply with a copy of the trial agreement within 24 hours.
+      {t.contact.reply_1}<br />
+      {t.contact.reply_2} <strong>{t.contact.reply_strong}</strong><br />
+      {t.contact.reply_3}
     </p>
     <a href="mailto:bbicashinfo@gmail.com?subject=ATM Placement Inquiry" class="btn-primary-large">
-      Send us a message →
+      {t.contact.cta}
     </a>
   </div>
   <div class="contact-details">
-    <div class="contact-detail">
-      <div class="contact-detail-label">Email</div>
-      <div class="contact-detail-value">bbicashinfo@gmail.com</div>
-    </div>
-    <div class="contact-detail">
-      <div class="contact-detail-label">Phone / WhatsApp</div>
-      <div class="contact-detail-value">+1 (786) 531-7335</div>
-    </div>
-    <div class="contact-detail">
-      <div class="contact-detail-label">Location</div>
-      <div class="contact-detail-value">North Miami Beach, FL 33160</div>
-    </div>
-    <div class="contact-detail">
-      <div class="contact-detail-label">Service area</div>
-      <div class="contact-detail-value">Miami-Dade · Broward</div>
-    </div>
+    {t.contact.details.map((d) => (
+      <div class="contact-detail">
+        <div class="contact-detail-label">{d.label}</div>
+        <div class="contact-detail-value">{d.value}</div>
+      </div>
+    ))}
   </div>
   <div class="lang-bar">SE HABLA ESPAÑOL &nbsp;·&nbsp; FALAMOS PORTUGUÊS &nbsp;·&nbsp; ENGLISH</div>
 </section>

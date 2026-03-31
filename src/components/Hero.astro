@@ -1,37 +1,33 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
 
 <section id="hero">
   <div class="hero-pattern"></div>
-  <div class="hero-tag">South Florida · ATM Placement Services</div>
+  <div class="hero-tag">{t.hero.tag}</div>
   <h1 class="hero-h1 serif">
-    Your business.<br />
-    Our ATM.<br />
-    <em>Monthly income — at no cost to you.</em>
+    {t.hero.h1_1}<br />
+    {t.hero.h1_2}<br />
+    <em>{t.hero.h1_em}</em>
   </h1>
-  <p class="hero-sub">
-    We install, insure, load and maintain a cash machine in your location.
-    You provide one outlet. We send you a check every month.
-  </p>
+  <p class="hero-sub">{t.hero.sub}</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Request your free ATM →</a>
-    <a href="#how" class="btn-ghost">See how it works ↓</a>
+    <a href="#contact" class="btn-primary">{t.hero.cta}</a>
+    <a href="#how" class="btn-ghost">{t.hero.ghost}</a>
   </div>
   <div class="hero-stats">
-    <div class="stat-item">
-      <span class="stat-num">$0</span>
-      <span class="stat-label">Installation cost</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">$0</span>
-      <span class="stat-label">Maintenance cost</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">6 mo</span>
-      <span class="stat-label">Trial · No penalty exit</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-num">24/7</span>
-      <span class="stat-label">PAI Alliance — Brinks monitoring</span>
-    </div>
+    {t.hero.stats.map((s) => (
+      <div class="stat-item">
+        <span class="stat-num">{s.num}</span>
+        <span class="stat-label">{s.label}</span>
+      </div>
+    ))}
   </div>
   <div class="hero-badge">
     <div class="badge-ring">

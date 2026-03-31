@@ -1,45 +1,29 @@
+---
+import type { Translations } from '../i18n/translations';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
 
 <section id="about">
-  <span class="section-tag">Who we are</span>
-  <h2 class="section-h2 serif">Small operation.<br />Institutional infrastructure.</h2>
+  <span class="section-tag">{t.about.tag}</span>
+  <h2 class="section-h2 serif">{t.about.h2_1}<br />{t.about.h2_2}</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>
-        <strong>BBI Invest LLC</strong> is a South Florida ATM placement company
-        founded on a simple premise: businesses shouldn't have to choose between
-        good service and a reliable operator. Most ATM providers are too large
-        to care about a single location. We built BBI Cash to be the opposite.
-      </p>
-      <p>
-        We serve Miami-Dade and Broward counties — restaurants, hotels, bars,
-        laundromats, barbershops, and condominium communities. We speak English,
-        Spanish and Portuguese, because this is Miami and your clients deserve
-        to be served in their language.
-      </p>
-      <p>
-        Our processing and cash management runs through
-        <strong>PAI Alliance — Brinks</strong>, a federally regulated network
-        with 24/7 monitoring and full Regulation E compliance. The infrastructure
-        is institutional. The service is personal. You get the best of both.
-      </p>
+      {t.about.paragraphs.map((p) => (
+        <p set:html={p} />
+      ))}
     </div>
     <div class="about-cards">
-      <div class="about-card">
-        <div class="about-card-title">BBI Invest LLC — Active Florida Entity</div>
-        <div class="about-card-text">Licensed and operating in the state of Florida. Available documentation and references upon request.</div>
-      </div>
-      <div class="about-card">
-        <div class="about-card-title">PAI Alliance — Brinks Processing</div>
-        <div class="about-card-text">All transactions processed through Payment Alliance International, federally regulated. The same network trusted by banks and national operators.</div>
-      </div>
-      <div class="about-card">
-        <div class="about-card-title">$1,000,000 General Liability Insurance</div>
-        <div class="about-card-text">Your location is named as Additional Insured on our policy. Certificate of Insurance provided before any installation begins.</div>
-      </div>
-      <div class="about-card">
-        <div class="about-card-title">Se habla Español · Falamos Português</div>
-        <div class="about-card-text">Our team is fully bilingual and we serve the Brazilian and Hispanic communities of Broward and Miami-Dade with the same level of care.</div>
-      </div>
+      {t.about.cards.map((c) => (
+        <div class="about-card">
+          <div class="about-card-title">{c.title}</div>
+          <div class="about-card-text">{c.text}</div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
