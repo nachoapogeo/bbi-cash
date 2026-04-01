@@ -35,7 +35,7 @@ const translations = {
       h2_2: 'Institutional infrastructure.',
       paragraphs: [
         '<strong>BBI Invest LLC</strong> is a South Florida ATM placement company founded on a simple premise: businesses shouldn\'t have to choose between good service and a reliable operator. Most ATM providers are too large to care about a single location. We built BBI Cash to be the opposite.',
-        'We serve Miami-Dade and Broward counties — restaurants, hotels, bars, laundromats, barbershops, and condominium communities. We speak English, Spanish and Portuguese, because this is Miami and your clients deserve to be served in their language.',
+        'We serve Miami-Dade, Broward and Palm Beach counties — restaurants, hotels, bars, laundromats, barbershops, and condominium communities. We speak English, Spanish and Portuguese, because this is Miami and your clients deserve to be served in their language.',
         'Our processing and cash management runs through <strong>PAI Alliance — Brinks</strong>, a federally regulated network with 24/7 monitoring and full Regulation E compliance. The infrastructure is institutional. The service is personal. You get the best of both.',
       ],
       cards: [
@@ -122,7 +122,7 @@ const translations = {
         { label: 'Email', value: 'bbicashinfo@gmail.com' },
         { label: 'Phone / WhatsApp', value: '+1 (786) 531-7335' },
         { label: 'Location', value: 'North Miami Beach, FL 33160' },
-        { label: 'Service area', value: 'Miami-Dade · Broward' },
+        { label: 'Service area', value: 'Miami-Dade · Broward · Palm Beach' },
       ],
     },
   },
@@ -157,7 +157,7 @@ const translations = {
       h2_2: 'Infraestructura institucional.',
       paragraphs: [
         '<strong>BBI Invest LLC</strong> es una empresa de colocación de ATMs en el sur de Florida fundada con una premisa simple: los negocios no deberían tener que elegir entre buen servicio y un operador confiable. La mayoría de los proveedores de ATM son demasiado grandes para preocuparse por una sola ubicación. Creamos BBI Cash para ser lo opuesto.',
-        'Servimos en los condados de Miami-Dade y Broward — restaurantes, hoteles, bares, lavanderías, barberías y comunidades de condominios. Hablamos inglés, español y portugués, porque esto es Miami y tus clientes merecen ser atendidos en su idioma.',
+        'Servimos en los condados de Miami-Dade, Broward y Palm Beach — restaurantes, hoteles, bares, lavanderías, barberías y comunidades de condominios. Hablamos inglés, español y portugués, porque esto es Miami y tus clientes merecen ser atendidos en su idioma.',
         'Nuestro procesamiento y manejo de efectivo opera a través de <strong>PAI Alliance — Brinks</strong>, una red regulada federalmente con monitoreo 24/7 y cumplimiento total de la Regulación E. La infraestructura es institucional. El servicio es personal. Obtienes lo mejor de ambos.',
       ],
       cards: [
@@ -244,7 +244,7 @@ const translations = {
         { label: 'Email', value: 'bbicashinfo@gmail.com' },
         { label: 'Teléfono / WhatsApp', value: '+1 (786) 531-7335' },
         { label: 'Ubicación', value: 'North Miami Beach, FL 33160' },
-        { label: 'Área de servicio', value: 'Miami-Dade · Broward' },
+        { label: 'Área de servicio', value: 'Miami-Dade · Broward · Palm Beach' },
       ],
     },
   },
@@ -279,7 +279,7 @@ const translations = {
       h2_2: 'Infraestrutura institucional.',
       paragraphs: [
         '<strong>BBI Invest LLC</strong> é uma empresa de instalação de ATMs no sul da Flórida fundada com uma premissa simples: negócios não deveriam ter que escolher entre bom serviço e um operador confiável. A maioria dos fornecedores de ATM são grandes demais para se preocupar com uma única localização. Criamos a BBI Cash para ser o oposto.',
-        'Atendemos os condados de Miami-Dade e Broward — restaurantes, hotéis, bares, lavanderias, barbearias e comunidades de condomínios. Falamos inglês, espanhol e português, porque isso é Miami e seus clientes merecem ser atendidos no seu idioma.',
+        'Atendemos os condados de Miami-Dade, Broward e Palm Beach — restaurantes, hotéis, bares, lavanderias, barbearias e comunidades de condomínios. Falamos inglês, espanhol e português, porque isso é Miami e seus clientes merecem ser atendidos no seu idioma.',
         'Nosso processamento e gerenciamento de dinheiro opera através da <strong>PAI Alliance — Brinks</strong>, uma rede regulamentada federalmente com monitoramento 24/7 e conformidade total com a Regulação E. A infraestrutura é institucional. O serviço é pessoal. Você tem o melhor dos dois.',
       ],
       cards: [
@@ -366,7 +366,7 @@ const translations = {
         { label: 'Email', value: 'bbicashinfo@gmail.com' },
         { label: 'Telefone / WhatsApp', value: '+1 (786) 531-7335' },
         { label: 'Localização', value: 'North Miami Beach, FL 33160' },
-        { label: 'Área de serviço', value: 'Miami-Dade · Broward' },
+        { label: 'Área de serviço', value: 'Miami-Dade · Broward · Palm Beach' },
       ],
     },
   },
