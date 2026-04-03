@@ -11,20 +11,45 @@ interface Props {
 const { t, locale } = Astro.props;
 const locales = getAlternateLocales(locale);
 const currentLabel = locale.toUpperCase();
+
+const navItems = [
+  { href: '#hero',     label: t.nav.home,     key: 'hero' },
+  { href: '#about',    label: t.nav.about,    key: 'about' },
+  { href: '#how',      label: t.nav.how,      key: 'how' },
+  { href: '#why',      label: t.nav.why,      key: 'why' },
+  { href: '#who',      label: t.nav.who,      key: 'who' },
+  { href: '#contract', label: t.nav.contract, key: 'contract' },
+];
 ---
 
-<nav>
-  <div class="nav-logo">
-    BBI Cash
-    <span>ATM Placement Services</span>
-  </div>
+<!-- Left sidebar -->
+<aside class="sidebar" id="sidebar">
+  <a href="#hero" class="sidebar-logo">
+    <span class="logo-name">BBI Cash</span>
+    <span class="logo-sub">ATM Placement Services</span>
+  </a>
 
-  <div class="nav-right">
-    <!-- Language dropdown — always visible -->
+  <nav class="sidebar-nav" aria-label="Main navigation">
+    {navItems.map(item => (
+      <a href={item.href} class="nav-item" data-section={item.key}>
+        <span class="nav-dot"></span>
+        <span class="nav-label">{item.label}</span>
+      </a>
+    ))}
+  </nav>
+
+  <div class="sidebar-spacer"></div>
+
+  <a href="#contact" class="nav-cta-btn">
+    {t.nav.cta}
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+
+  <div class="sidebar-footer">
     <div class="lang-dropdown">
       <button class="lang-toggle" aria-label="Change language">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        {currentLabel}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="lang-label">{currentLabel}</span>
         <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="lang-menu">
@@ -33,36 +58,160 @@ const currentLabel = locale.toUpperCase();
         ))}
       </div>
     </div>
+  </div>
+</aside>
 
-    <!-- Hamburger button — mobile only -->
+<!-- Mobile top bar -->
+<header class="mobile-header">
+  <a href="#hero" class="mobile-logo">BBI Cash</a>
+  <div class="mobile-right">
+    <div class="lang-dropdown mobile-lang">
+      <button class="lang-toggle" aria-label="Change language">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="lang-label">{currentLabel}</span>
+        <svg class="chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="lang-menu">
+        {locales.map((l) => (
+          <a href={l.path} class:list={[{ active: l.locale === locale }]}>{l.label}</a>
+        ))}
+      </div>
+    </div>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
-
-    <!-- Nav links -->
-    <div class="nav-links">
-      <a href="#about">{t.nav.about}</a>
-      <a href="#how">{t.nav.how}</a>
-      <a href="#why">{t.nav.why}</a>
-      <a href="#who">{t.nav.who}</a>
-      <a href="#contact" class="nav-cta">{t.nav.cta}</a>
-    </div>
   </div>
-</nav>
+</header>
 
 <!-- Mobile overlay -->
-<div class="mobile-overlay"></div>
+<div class="mobile-overlay" id="mobile-overlay"></div>
 
 <style>
-  .nav-right {
+  /* ── SIDEBAR ──────────────────────────────────────────── */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 220px;
+    background: var(--dg);
+    border-right: 1px solid rgba(201,160,64,0.18);
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    flex-direction: column;
+    z-index: 100;
+    overflow-y: auto;
+    padding: 0 0 1.5rem;
   }
 
-  /* ── Language dropdown ──────────────────────── */
+  /* Logo */
+  .sidebar-logo {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem 1.5rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: -0.3px;
+    line-height: 1;
+  }
+  .logo-sub {
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  /* Nav items */
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 0;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 1.5rem;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.82rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+    border-left: 2px solid transparent;
+    position: relative;
+  }
+  .nav-item:hover {
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.04);
+  }
+  .nav-item.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(201,160,64,0.06);
+  }
+  .nav-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+    opacity: 0.5;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .nav-item.active .nav-dot {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  .nav-label {
+    line-height: 1;
+  }
+
+  /* CTA button */
+  .sidebar-spacer {
+    flex: 1;
+    min-height: 1rem;
+  }
+  .nav-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 1.25rem 1.25rem;
+    padding: 10px 16px;
+    background: var(--gold);
+    color: var(--dg);
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .nav-cta-btn:hover {
+    background: var(--gold2);
+  }
+
+  /* Footer / language selector */
+  .sidebar-footer {
+    padding: 1rem 1.25rem 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+
+  /* ── LANG DROPDOWN ──────────────────────────────────── */
   .lang-dropdown {
     position: relative;
   }
@@ -70,44 +219,47 @@ const currentLabel = locale.toUpperCase();
     display: flex;
     align-items: center;
     gap: 6px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5);
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
     padding: 6px 10px;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
     transition: all 0.2s;
+    width: 100%;
   }
   .lang-toggle:hover {
-    border-color: rgba(201,160,64,0.4);
+    border-color: rgba(201,160,64,0.35);
     color: var(--gold);
   }
-  .lang-toggle svg {
-    flex-shrink: 0;
+  .lang-toggle .lang-label {
+    flex: 1;
+    text-align: left;
   }
   .chevron {
     transition: transform 0.2s;
+    flex-shrink: 0;
   }
   .lang-dropdown.open .chevron {
     transform: rotate(180deg);
   }
   .lang-menu {
     position: absolute;
-    top: calc(100% + 8px);
+    bottom: calc(100% + 6px);
+    left: 0;
     right: 0;
     background: rgba(11,31,15,0.97);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(201,160,64,0.2);
-    border-radius: 8px;
-    padding: 6px;
-    min-width: 100px;
+    border-radius: 7px;
+    padding: 5px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-4px);
+    transform: translateY(4px);
     transition: all 0.2s;
     z-index: 200;
   }
@@ -118,12 +270,13 @@ const currentLabel = locale.toUpperCase();
   }
   .lang-menu a {
     display: block;
-    padding: 8px 14px;
-    font-size: 0.8rem !important;
+    padding: 7px 12px;
+    font-size: 0.78rem !important;
     font-weight: 500;
     color: rgba(255,255,255,0.5) !important;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: all 0.15s;
+    text-decoration: none;
   }
   .lang-menu a:hover {
     background: rgba(201,160,64,0.1);
@@ -134,9 +287,50 @@ const currentLabel = locale.toUpperCase();
     font-weight: 700;
   }
 
-  /* ── Hamburger ──────────────────────────────── */
-  .hamburger {
+  /* ── MOBILE HEADER ──────────────────────────────────── */
+  .mobile-header {
     display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(11,31,15,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201,160,64,0.18);
+    z-index: 110;
+    padding: 0 1.25rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mobile-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+  .mobile-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Mobile lang dropdown — menu opens downward */
+  .mobile-lang .lang-menu {
+    bottom: auto;
+    top: calc(100% + 6px);
+    transform: translateY(-4px);
+    right: 0;
+    left: auto;
+    min-width: 110px;
+  }
+  .mobile-lang.open .lang-menu {
+    transform: translateY(0);
+  }
+
+  /* ── HAMBURGER ──────────────────────────────────────── */
+  .hamburger {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
@@ -146,7 +340,6 @@ const currentLabel = locale.toUpperCase();
     padding: 4px;
     width: 32px;
     height: 32px;
-    z-index: 110;
   }
   .hamburger span {
     display: block;
@@ -157,23 +350,17 @@ const currentLabel = locale.toUpperCase();
     transition: all 0.3s;
     transform-origin: center;
   }
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-  }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-  /* ── Mobile overlay ─────────────────────────── */
+  /* ── MOBILE OVERLAY ─────────────────────────────────── */
   .mobile-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 90;
+    background: rgba(0,0,0,0.55);
+    z-index: 95;
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -181,94 +368,98 @@ const currentLabel = locale.toUpperCase();
     opacity: 1;
   }
 
-  /* ── Mobile ─────────────────────────────────── */
+  /* ── MOBILE BREAKPOINT ──────────────────────────────── */
   @media (max-width: 768px) {
-    .hamburger {
+    .sidebar {
+      left: -220px;
+      top: 60px;
+      z-index: 105;
+      transition: left 0.3s ease;
+      border-top: 1px solid rgba(201,160,64,0.18);
+    }
+    .sidebar.open {
+      left: 0;
+    }
+    .mobile-header {
       display: flex;
-    }
-
-    .nav-links {
-      position: fixed;
-      top: 0;
-      right: -280px;
-      width: 280px;
-      height: 100vh;
-      background: rgba(11,31,15,0.98);
-      backdrop-filter: blur(12px);
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 80px 2rem 2rem;
-      gap: 0;
-      z-index: 100;
-      transition: right 0.3s ease;
-      border-left: 1px solid rgba(201,160,64,0.15);
-      display: flex !important;
-    }
-    .nav-links.open {
-      right: 0;
-    }
-    .nav-links a {
-      width: 100%;
-      padding: 14px 0;
-      font-size: 1rem !important;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav-links .nav-cta {
-      margin-top: 1rem;
-      text-align: center;
-      padding: 14px 20px !important;
-      width: 100%;
-      display: block;
     }
     .mobile-overlay.active {
       display: block;
-      opacity: 1;
     }
   }
 </style>
 
 <script>
   function initNav() {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const overlay = document.querySelector('.mobile-overlay');
-    const langDropdown = document.querySelector('.lang-dropdown');
-    const langToggle = document.querySelector('.lang-toggle');
+    const sidebar    = document.getElementById('sidebar');
+    const overlay    = document.getElementById('mobile-overlay');
+    const hamburger  = document.querySelector('.hamburger');
+    const langDropdowns = document.querySelectorAll('.lang-dropdown');
 
-    function closeMenu() {
-      hamburger?.classList.remove('active');
-      navLinks?.classList.remove('open');
+    // ── Hamburger / mobile sidebar ──
+    function closeSidebar() {
+      sidebar?.classList.remove('open');
       overlay?.classList.remove('active');
+      hamburger?.classList.remove('active');
       hamburger?.setAttribute('aria-expanded', 'false');
     }
 
-    function closeLang() {
-      langDropdown?.classList.remove('open');
+    hamburger?.addEventListener('click', () => {
+      const isOpen = sidebar?.classList.toggle('open');
+      overlay?.classList.toggle('active');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', String(!!isOpen));
+      closeAllLang();
+    });
+
+    overlay?.addEventListener('click', closeSidebar);
+
+    sidebar?.querySelectorAll('a.nav-item, a.nav-cta-btn').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
+
+    // ── Language dropdowns ──
+    function closeAllLang() {
+      langDropdowns.forEach(d => d.classList.remove('open'));
     }
 
-    hamburger?.addEventListener('click', () => {
-      const isOpen = navLinks?.classList.toggle('open');
-      hamburger.classList.toggle('active');
-      overlay?.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      closeLang();
-    });
-
-    overlay?.addEventListener('click', closeMenu);
-
-    navLinks?.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    langToggle?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      langDropdown?.classList.toggle('open');
+    langDropdowns.forEach(dropdown => {
+      const toggle = dropdown.querySelector('.lang-toggle');
+      toggle?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wasOpen = dropdown.classList.contains('open');
+        closeAllLang();
+        if (!wasOpen) dropdown.classList.add('open');
+      });
     });
 
     document.addEventListener('click', (e) => {
-      if (!langDropdown?.contains(e.target as Node)) {
-        closeLang();
-      }
+      langDropdowns.forEach(d => {
+        if (!d.contains(e.target as Node)) d.classList.remove('open');
+      });
+    });
+
+    // ── Active section tracking (Intersection Observer) ──
+    const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+    const sections = ['hero', 'about', 'how', 'why', 'who', 'contract', 'contact'];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navItems.forEach(item => {
+              item.classList.toggle('active', (item as HTMLElement).dataset.section === id);
+            });
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -70% 0px', threshold: 0 }
+    );
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
     });
   }
 

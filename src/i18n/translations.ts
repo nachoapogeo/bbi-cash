@@ -8,10 +8,12 @@ const translations = {
   en: {
     lang: 'en',
     nav: {
+      home: 'Overview',
       about: 'About',
       how: 'How It Works',
       why: 'Why BBI',
       who: 'Who We Serve',
+      contract: 'Agreement',
       cta: 'Get Started',
     },
     hero: {
@@ -130,10 +132,12 @@ const translations = {
   es: {
     lang: 'es',
     nav: {
+      home: 'Inicio',
       about: 'Nosotros',
       how: 'Cómo funciona',
       why: 'Por qué BBI',
       who: 'A quién servimos',
+      contract: 'Acuerdo',
       cta: 'Empezar',
     },
     hero: {
@@ -252,10 +256,12 @@ const translations = {
   pt: {
     lang: 'pt',
     nav: {
+      home: 'Início',
       about: 'Sobre nós',
       how: 'Como funciona',
       why: 'Por que BBI',
       who: 'Quem atendemos',
+      contract: 'Contrato',
       cta: 'Começar',
     },
     hero: {
