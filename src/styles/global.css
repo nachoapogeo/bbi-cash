@@ -23,42 +23,17 @@ body {
 .serif { font-family: 'Playfair Display', serif; }
 a { text-decoration: none; color: inherit; }
 
-/* ── NAV ──────────────────────────────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(11,31,15,0.96);
-  backdrop-filter: blur(10px);
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0 5%;
-  height: 64px;
-  border-bottom: 1px solid rgba(201,160,64,0.2);
+/* ── SIDEBAR LAYOUT ───────────────────────────────────────── */
+body {
+  padding-left: 220px;
 }
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem; font-weight: 700;
-  color: var(--gold);
-  letter-spacing: -0.5px;
-}
-.nav-logo span { color: rgba(255,255,255,0.5); font-size: 0.75rem; display: block; font-family: 'DM Sans', sans-serif; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
-.nav-links { display: flex; gap: 2rem; align-items: center; }
-.nav-links a { color: rgba(255,255,255,0.7); font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--gold); }
-.nav-cta {
-  background: var(--gold);
-  color: var(--dg) !important;
-  padding: 8px 20px;
-  border-radius: 4px;
-  font-weight: 600 !important;
-  font-size: 0.875rem !important;
-}
-.nav-cta:hover { background: var(--gold2) !important; color: var(--dg) !important; }
 
 /* ── HERO ─────────────────────────────────────────────────── */
 #hero {
   min-height: 100vh;
   background: var(--dg);
   display: flex; flex-direction: column; justify-content: center;
-  padding: 120px 5% 80px;
+  padding: 80px 5% 80px;
   position: relative; overflow: hidden;
 }
 .hero-pattern {
@@ -424,7 +399,13 @@ footer {
 .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.2); }
 .footer-right { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
 
-/* ── RESPONSIVE NAV ───────────────────────────────────────── */
+/* ── RESPONSIVE ───────────────────────────────────────────── */
 @media (max-width: 768px) {
-  nav { padding: 0 5%; }
+  body {
+    padding-left: 0;
+    padding-top: 60px;
+  }
+  #hero {
+    padding-top: 60px;
+  }
 }
